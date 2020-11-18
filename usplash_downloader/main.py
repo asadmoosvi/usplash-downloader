@@ -1,4 +1,5 @@
 import click
+import sys
 from usplash_downloader.usplash import download_photo
 
 
@@ -39,6 +40,10 @@ def main(
     photo_id,
     keywords,
 ):
+    if not any([user, collection, photo_id, keywords]):
+        click.echo(click.get_current_context().get_help())
+        sys.exit(1)
+
     for i in range(limit):
         download_photo(
             user=user,
