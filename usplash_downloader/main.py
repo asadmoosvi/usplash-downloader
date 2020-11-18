@@ -1,5 +1,5 @@
 import click
-from usplash import download_photo
+from usplash_downloader.usplash import download_photo
 
 
 @click.command(help="download random images from unsplash.com")
