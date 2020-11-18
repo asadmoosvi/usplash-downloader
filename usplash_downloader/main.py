@@ -5,7 +5,7 @@ from usplash import download_photo
 @click.command(help="download random images from unsplash.com")
 @click.option("-u", "--user", help="download images by a certain user")
 @click.option(
-    "-d", "--destination", help="destination directory to save images in"
+    "-o", "--output-dir", help="destination directory to save images in"
 )
 @click.option(
     "-l",
@@ -26,7 +26,7 @@ from usplash import download_photo
 @click.help_option("-h", "--help")
 def main(
     user,
-    destination,
+    output_dir,
     limit,
     from_likes,
     collection,
@@ -37,7 +37,7 @@ def main(
     for i in range(limit):
         download_photo(
             user=user,
-            save_dir=destination,
+            save_dir=output_dir,
             from_likes=from_likes,
             collection=collection,
             dimensions=dimensions,
