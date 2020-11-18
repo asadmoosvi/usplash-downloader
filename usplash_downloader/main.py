@@ -15,10 +15,15 @@ from usplash import download_photo
     show_default=True,
 )
 @click.option(
-    "--from-likes", is_flag=True, help="download images from a user's likes"
+    "-f",
+    "--from-likes",
+    is_flag=True,
+    help="download images from a user's likes",
 )
 @click.option("-c", "--collection", help="download images from a collection")
-@click.option("--dimensions", help="dimensions of the images to download")
+@click.option(
+    "-d", "--dimensions", help="dimensions of the images to download"
+)
 @click.option("-i", "--photo-id", help="id of image to download")
 @click.option(
     "-k", "--keywords", help="space separated keywords of images to download"
