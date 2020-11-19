@@ -35,6 +35,7 @@ from usplash_downloader.usplash import Usplash
     is_flag=True,
     help="download completely random images",
 )
+@click.option("-v", "--verbose", is_flag=True, help="set verbose mode")
 @click.help_option("-h", "--help")
 def main(
     user,
@@ -46,6 +47,7 @@ def main(
     photo_id,
     keywords,
     random_images,
+    verbose
 ):
     if not any([user, collection, photo_id, keywords]):
         if not random_images:
@@ -63,6 +65,7 @@ def main(
             dimensions=dimensions,
             photo_id=photo_id,
             keywords=keywords,
+            verbose=verbose
         )
         click.echo(f":: {i + 1} image(s) downloaded\n")
 
