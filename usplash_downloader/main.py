@@ -1,6 +1,6 @@
 import click
 import sys
-from usplash_downloader.usplash import download_photo
+from usplash_downloader.usplash import Usplash
 
 
 @click.command(help="download random images from unsplash.com")
@@ -55,7 +55,7 @@ def main(
             click.echo(":: downloading completely random images\n")
 
     for i in range(limit):
-        download_photo(
+        Usplash.download_photo(
             user=user,
             save_dir=output_dir,
             from_likes=from_likes,
