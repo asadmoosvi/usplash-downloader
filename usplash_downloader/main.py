@@ -47,7 +47,7 @@ def main(
     photo_id,
     keywords,
     random_images,
-    verbose
+    verbose,
 ):
     if not any([user, collection, photo_id, keywords]):
         if not random_images:
@@ -56,8 +56,10 @@ def main(
         else:
             click.echo(":: downloading completely random images\n")
 
+    downloaded_images = 0
+
     for i in range(limit):
-        Usplash.download_photo(
+        success = Usplash.download_photo(
             user=user,
             save_dir=output_dir,
             from_likes=from_likes,
@@ -65,9 +67,12 @@ def main(
             dimensions=dimensions,
             photo_id=photo_id,
             keywords=keywords,
-            verbose=verbose
+            verbose=verbose,
         )
-        click.echo(f":: {i + 1} image(s) downloaded\n")
+
+        if success:
+            downloaded_images += 1
+        click.echo(f":: {downloaded_images} image(s) downloaded\n")
 
 
 if __name__ == "__main__":
