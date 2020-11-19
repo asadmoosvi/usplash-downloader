@@ -54,7 +54,7 @@ def main(
             photo_id=photo_id,
             keywords=keywords,
         )
-        click.echo()
+        click.echo(f":: {i + 1} image(s) downloaded\n")
 
 
 if __name__ == "__main__":
