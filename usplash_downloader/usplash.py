@@ -45,12 +45,13 @@ class Usplash:
             url = url + "?" + ",".join(keywords.split())
 
         cls.download_call_count += 1
-        url += f"?sig={cls.download_call_count}"
+        url += "?sig={download_count}"
 
         while True:
-            message(f"downloading image from url `{url}`")
+            formatted_url = url.format(download_count=cls.download_call_count)
+            message(f"downloading image from url `{formatted_url}`")
 
-            response = requests.get(url)
+            response = requests.get(formatted_url)
             response.raise_for_status()
             redirect_url = response.history[0].headers["Location"]
 
@@ -79,6 +80,7 @@ class Usplash:
                     f"file `{filename}` already downloaded,"
                     " retrying next random image..."
                 )
+                cls.download_call_count += 1
 
         message(f"Saving to file `{filename}`")
         with open(filename, "wb") as out_file:
