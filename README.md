@@ -27,3 +27,40 @@ Options:
   -r, --random-images    download completely random images
   -h, --help             Show this message and exit.
 ```
+
+# usage
+
+## download images by a user
+
+```
+# download an image by user named unsplash
+$ usdl -u unsplash
+
+# download 10 images by a user named unsplash
+$ usdl -u unsplash -l 10
+
+# download 10 images from a user's likes
+$ usdl -u unsplash -l 10 --from-likes
+
+# download images from a user named unsplash and save it in a directory with the same name
+$ usdl -u unsplash -l 10 -o unsplash
+```
+
+
+## download images based on keywords
+
+```
+# download images with the the following keywords: sunset beach wallpapers
+$ usdl -k 'sunset beach wallpapers' -o wallpapers -l 5
+```
+
+
+## download images with a certain dimension
+```
+# download science and tech images with a dimension of 1920x1080
+$ usdl -k 'science tech' -d '1920x1080' -l 20 -o science-tech
+```
+
+
+## download completely random images
+`$ usdl -r -l 25 -o random-images`
