@@ -37,6 +37,8 @@ def download_photo(
     if keywords:
         url = url + "/?" + ",".join(keywords.split())
 
+    url += "?sig=123"
+
     message(f"downloading image from url `{url}`")
 
     response = requests.get(url)
