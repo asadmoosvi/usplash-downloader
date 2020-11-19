@@ -29,6 +29,12 @@ from usplash_downloader.usplash import download_photo
 @click.option(
     "-k", "--keywords", help="space separated keywords of images to download"
 )
+@click.option(
+    "-r",
+    "--random-images",
+    is_flag=True,
+    help="download completely random images",
+)
 @click.help_option("-h", "--help")
 def main(
     user,
@@ -39,10 +45,14 @@ def main(
     dimensions,
     photo_id,
     keywords,
+    random_images,
 ):
     if not any([user, collection, photo_id, keywords]):
-        click.echo(click.get_current_context().get_help())
-        sys.exit(1)
+        if not random_images:
+            click.echo(click.get_current_context().get_help())
+            sys.exit(1)
+        else:
+            click.echo(":: downloading completely random images\n")
 
     for i in range(limit):
         download_photo(
