@@ -24,5 +24,6 @@ Options:
   -d, --dimensions TEXT  dimensions of the images to download
   -i, --photo-id TEXT    id of image to download
   -k, --keywords TEXT    space separated keywords of images to download
+  -r, --random-images    download completely random images
   -h, --help             Show this message and exit.
 ```
