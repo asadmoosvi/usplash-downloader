@@ -34,9 +34,12 @@ def download_photo(
     if dimensions:
         url += f"/{dimensions}"
 
-    url += "/sig=123"
+    url += "/"
+
     if keywords:
         url = url + "?" + ",".join(keywords.split())
+
+    url += "?sig=123"
 
     while True:
         message(f"downloading image from url `{url}`")
