@@ -47,6 +47,9 @@ class Usplash:
         cls.download_call_count += 1
         url += "?sig={download_count}"
 
+        # abort program after a certain number of retries
+        retry_count = 0
+
         while True:
             formatted_url = url.format(download_count=cls.download_call_count)
             message(f"downloading image from url `{formatted_url}`")
@@ -76,9 +79,17 @@ class Usplash:
             if not os.path.exists(filename):
                 break
             else:
+                if retry_count == 5:
+                    print()
+                    message(
+                        "Maximum retry limit reached. Aborting program.",
+                        die=True,
+                    )
+
+                retry_count += 1
                 message(
-                    f"file `{filename}` already downloaded,"
-                    " retrying next random image..."
+                    f"[retry: {retry_count}] file `{filename}` already "
+                    "downloaded, retrying next random image..."
                 )
                 cls.download_call_count += 1
 
