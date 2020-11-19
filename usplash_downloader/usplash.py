@@ -12,6 +12,8 @@ def message(msg: str, die: bool = False) -> None:
 
 
 class Usplash:
+    download_call_count = 0
+
     @classmethod
     def download_photo(
         cls,
@@ -42,7 +44,8 @@ class Usplash:
         if keywords:
             url = url + "?" + ",".join(keywords.split())
 
-        url += "?sig=123"
+        cls.download_call_count += 1
+        url += f"?sig={cls.download_call_count}"
 
         while True:
             message(f"downloading image from url `{url}`")
