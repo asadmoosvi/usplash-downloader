@@ -54,7 +54,7 @@ def main(
             click.echo(click.get_current_context().get_help())
             sys.exit(1)
         else:
-            click.echo(":: downloading completely random images\n")
+            click.secho(":: downloading completely random images\n", bold=True)
 
     downloaded_images = 0
 
@@ -72,7 +72,9 @@ def main(
 
         if success:
             downloaded_images += 1
-        click.echo(f":: {downloaded_images} image(s) downloaded\n")
+        click.secho(f":: {downloaded_images} image(s) downloaded\n", fg="green", bold=True)
+
+    click.secho("...download complete.", fg="green", bold=True)
 
 
 if __name__ == "__main__":

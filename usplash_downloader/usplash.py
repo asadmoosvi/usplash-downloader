@@ -1,12 +1,20 @@
 import requests
 import os
 import sys
+import click
 from typing import Optional
 
 
 def message(msg: str, die: bool = False) -> None:
-    stream = sys.stderr if die else sys.stdout
-    print(f"===> {msg}", file=stream)
+    if die:
+        err = True
+        color = "red"
+    else:
+        err = False
+        color = "yellow"
+
+    click.secho(f"===> {msg}", fg=color, err=err)
+
     if die:
         sys.exit(1)
 
