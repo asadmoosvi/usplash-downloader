@@ -74,7 +74,7 @@ def main(
             downloaded_images += 1
         click.secho(f":: {downloaded_images} image(s) downloaded\n", fg="green", bold=True)
 
-    click.secho("...download complete.", fg="green", bold=True)
+    click.secho("...download complete.", fg="bright_cyan", bold=True)
 
 
 if __name__ == "__main__":
