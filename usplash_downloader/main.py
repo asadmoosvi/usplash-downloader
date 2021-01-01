@@ -57,7 +57,7 @@ def main(
             click.secho(":: downloading completely random images\n", bold=True)
 
     downloaded_images = 0
-
+    not_found_count = 0
     for i in range(limit):
         success = Usplash.download_photo(
             user=user,
@@ -72,7 +72,20 @@ def main(
 
         if success:
             downloaded_images += 1
-        click.secho(f":: {downloaded_images} image(s) downloaded\n", fg="green", bold=True)
+        else:
+            not_found_count += 1
+
+        click.secho(
+            f":: {downloaded_images} image(s) downloaded\n",
+            fg="green", bold=True
+        )
+
+        if not_found_count == 3:
+            click.secho(
+                ":: too many 404s, aborting program...",
+                fg="bright_red"
+            )
+            sys.exit(1)
 
     click.secho("...download complete.", fg="bright_cyan", bold=True)
 
