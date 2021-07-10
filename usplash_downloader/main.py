@@ -1,5 +1,7 @@
 import click
 import sys
+import os
+import glob
 from usplash_downloader.usplash import Usplash
 
 
@@ -35,6 +37,12 @@ from usplash_downloader.usplash import Usplash
     is_flag=True,
     help="download completely random images",
 )
+@click.option(
+    "-n",
+    "--numbered",
+    is_flag=True,
+    help="use simple numbered filenames like image1.jpg, image2.jpg, etc...",
+)
 @click.option("-v", "--verbose", is_flag=True, help="set verbose mode")
 @click.help_option("-h", "--help")
 def main(
@@ -48,6 +56,7 @@ def main(
     keywords,
     random_images,
     verbose,
+    numbered,
 ):
     if not any([user, collection, photo_id, keywords]):
         if not random_images:
@@ -55,6 +64,12 @@ def main(
             sys.exit(1)
         else:
             click.secho(":: downloading completely random images\n", bold=True)
+
+    if numbered:
+        click.secho(
+            ":: files will be renamed using simple numbering after completion\n",
+            bold=True
+        )
 
     downloaded_images = 0
     not_found_count = 0
@@ -88,6 +103,39 @@ def main(
             sys.exit(1)
 
     click.secho("...download complete.", fg="bright_cyan", bold=True)
+    if numbered:
+        click.secho("\n:: renaming files...", fg="bright_cyan", bold=True)
+        parent_dir = os.getcwd()
+        if output_dir:
+            click.secho(
+                f":: changing to output directory {output_dir!r}",
+                fg="bright_cyan",
+                bold=True,
+            )
+            os.chdir(output_dir)
+        click.secho()
+        images = glob.glob('photo*.jpeg')
+        for i, img in enumerate(images, 1):
+            new_name = f'image{i}.jpeg'
+            click.secho(
+                f"-> renaming file {img!r} to {new_name!r}",
+                fg="yellow", bold=True
+            )
+            os.rename(img, new_name)
+
+        if output_dir:
+            click.secho(
+                f"\n:: going back to parent directory",
+                fg="bright_cyan",
+                bold=True
+            )
+            os.chdir(parent_dir)
+
+        click.secho(
+            "\n...all files renamed successfully.",
+            fg="bright_cyan",
+            bold=True
+        )
 
 
 if __name__ == "__main__":
